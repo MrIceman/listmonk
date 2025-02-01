@@ -90,6 +90,7 @@ const (
 	// Templates.
 	TemplateTypeCampaign = "campaign"
 	TemplateTypeTx       = "tx"
+	TemplateTypeSystem   = "system"
 )
 
 // Headers represents an array of string maps used to represent SMTP, HTTP headers etc.

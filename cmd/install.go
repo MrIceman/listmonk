@@ -196,6 +196,16 @@ func installTemplates(q *models.Queries) (int, int) {
 		lo.Fatalf("error creating sample transactional template: %v", err)
 	}
 
+	// System templates
+	var sysSubscriberOptinTplID int
+	subOptinTpl, err := fs.Get("/static/email-templates/subscriber-optin.tpl")
+	if err != nil {
+		lo.Fatalf("error reading subscriber opt-in template: %v", err)
+	}
+	if err := q.CreateTemplate.Get(&sysSubscriberOptinTplID, "Subscriber opt-in template", models.TemplateTypeSystem, "Welcome {{ .Subscriber.Name }}", subOptinTpl.ReadBytes()); err != nil {
+		lo.Fatalf("error creating subscriber opt-in template: %v", err)
+	}
+
 	return campTplID, archiveTplID
 }
 
